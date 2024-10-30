@@ -1,0 +1,62 @@
+<!doctype html>
+<html ⚡>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <link rel="canonical" href="https://example.com">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <style amp-custom>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .redirect-message {
+      text-align: center;
+      font-size: 1.5em;
+      color: #333;
+    }
+  </style>
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+</head>
+<body>
+
+  <div class="redirect-message">
+    Redirecting to <a href="https://example.com">example.com</a>...
+  </div>
+
+  <!-- Redirect Script with a delay -->
+  <amp-analytics config="https://example.com/analytics-config.json">
+    <script type="application/json">
+      {
+        "requests": {
+          "pageview": "https://example.com/track?event=redirect"
+        },
+        "triggers": {
+          "pageLoad": {
+            "on": "visible",
+            "request": "pageview",
+            "extraUrlParams": {
+              "redirectTo": "https://example.com"
+            }
+          }
+        }
+      }
+    </script>
+  </amp-analytics>
+
+  <!-- JavaScript Redirect after 3 seconds -->
+  <amp-script layout="nodisplay">
+    <script>
+      setTimeout(() => {
+        window.location.href = 'https://example.com';
+      }, 3000);
+    </script>
+  </amp-script>
+
+</body>
+</html>
